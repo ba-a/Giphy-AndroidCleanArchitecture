@@ -6,6 +6,8 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import de.giphy_clean_architecture.data.repository.remote.GiphyTrendingRemoteSource
+import de.giphy_clean_architecture.data.repository.remote.mapper.GiphyTrendingRemoteMapper
+import de.giphy_clean_architecture.data.service.ApiErrorHandle
 import de.giphy_clean_architecture.data.service.ApiService
 import de.giphy_clean_architecture.domain.repository.GiphyTrendingRepository
 import okhttp3.Interceptor
@@ -23,10 +25,17 @@ val dataRemoteModule = module {
 
     single { get<Retrofit>().create(ApiService::class.java) }
 
+    single { ApiErrorHandle() }
+
+    single { GiphyTrendingRemoteMapper() }
+
     single<GiphyTrendingRepository> {
         GiphyTrendingRemoteSource(
             apiKey = "enter_api_key",
-            apiService = get()
+            apiService = get(),
+            mapper = get(),
+            appDispatchers = get(),
+            apiErrorHandle = get()
         )
     }
 }

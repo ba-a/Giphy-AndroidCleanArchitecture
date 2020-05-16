@@ -1,6 +1,6 @@
-package de.giphy_clean_architecture.data.model
+package de.giphy_clean_architecture.domain.model
 
-data class Downsized(
+data class Giphy(
     val height: String,
     val size: String,
     val url: String,

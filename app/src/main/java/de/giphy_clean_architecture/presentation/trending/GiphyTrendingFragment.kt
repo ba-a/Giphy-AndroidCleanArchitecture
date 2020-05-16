@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import de.giphy_androidcleanarchitecture.R
-import de.giphy_clean_architecture.data.model.GiphyTrends
+import de.giphy_clean_architecture.domain.model.Giphy
 import io.uniflow.androidx.flow.onStates
 import kotlinx.android.synthetic.main.giphy_trending_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -27,28 +26,27 @@ class GiphyTrendingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Observe incoming states
+        initRecyclerView()
+
         onStates(giphyTrendingViewModel) { state ->
             when (state) {
-                // react on WeatherState update
-                is GiphyTrendingState -> showTrendingGiphys(state)
+                // TODO implement other states
+                is GiphyTrendingState.ShowSuccess -> showTrendingGiphys(state.trendingGiphys)
             }
         }
-        initRecyclerView()
+
         giphyTrendingViewModel.getTrendingGiphys()
     }
 
     private fun initRecyclerView() {
         recyclerView_trending_giphy.layoutManager = GridLayoutManager(context, 3)
-        recyclerView_trending_giphy.adapter = GiphyTrendingAdapter(GiphyTrends(emptyList()))
+        recyclerView_trending_giphy.adapter = GiphyTrendingAdapter(emptyList())
     }
 
-    private fun showTrendingGiphys(state: GiphyTrendingState) {
+    private fun showTrendingGiphys(giphys: List<Giphy>) {
         (recyclerView_trending_giphy.adapter as GiphyTrendingAdapter).trendingGiphys =
-            state.trendingGiphys
+            giphys
         (recyclerView_trending_giphy.adapter as GiphyTrendingAdapter).notifyDataSetChanged()
 
     }
-
-
 }

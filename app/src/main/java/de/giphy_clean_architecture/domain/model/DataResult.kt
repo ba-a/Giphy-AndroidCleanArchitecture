@@ -7,5 +7,12 @@ sealed class DataResult<out T : Any> {
 
 data class ErrorModel(
     val message: String?,
-    val code: Int?
-)
+    val code: Int?,
+    val exception: Throwable? = null,
+    val errorType: ErrorType? = null
+) {
+    enum class ErrorType {
+        FULL_SCREEN,
+        HINT
+    }
+}
