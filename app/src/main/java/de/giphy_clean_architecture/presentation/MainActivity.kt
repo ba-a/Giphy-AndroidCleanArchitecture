@@ -2,7 +2,7 @@ package de.giphy_clean_architecture.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import de.inovex.giphy_androidcleanarchitecture.R
+import de.giphy_androidcleanarchitecture.R
 
 class MainActivity : AppCompatActivity() {
 

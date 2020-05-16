@@ -1,4 +1,4 @@
-package de.inovex.giphy_androidcleanarchitecture
+package de.giphy_androidcleanarchitecture
 
 import org.junit.Test
 

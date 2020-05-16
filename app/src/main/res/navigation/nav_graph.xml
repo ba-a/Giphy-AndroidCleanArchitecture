@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navgraph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/giphyTrendingFragment">
 
+    <fragment
+        android:id="@+id/giphyTrendingFragment"
+        android:name="de.giphy_clean_architecture.presentation.trending.GiphyTrendingFragment"
+        android:label="giphy_trending_fragment"
+        tools:layout="@layout/giphy_trending_fragment" />
 </navigation>

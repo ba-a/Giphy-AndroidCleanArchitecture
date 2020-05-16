@@ -11,7 +11,7 @@ android {
 
 
     defaultConfig {
-        applicationId "de.inovex.giphy_androidcleanarchitecture"
+        applicationId "de.giphy_androidcleanarchitecture"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
@@ -43,7 +43,11 @@ dependencies {
     def joda_version = "2.10.5"
     def appcompat_version = '1.1.0'
     def ktx_version = '1.2.0'
-
+    def uniflow_version = '0.11.0'
+    def stetho_version = '1.5.1'
+    def chucker = "3.2.0"
+    def okhttp_logging_interceptor_version = '3.12.1'
+    def timber_version = '4.7.1'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -51,6 +55,9 @@ dependencies {
     implementation "androidx.core:core-ktx:$ktx_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -63,6 +70,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.google.code.gson:gson:$gson_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version"
 
     //Koin
     implementation "org.koin:koin-core:$koin_version"
@@ -77,4 +85,16 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    // Uniflow
+    implementation "io.uniflow:uniflow-androidx:$uniflow_version"
+    testImplementation "io.uniflow:uniflow-androidx-test:$uniflow_version"
+
+    implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
+
+    // Chucker
+    debugImplementation "com.github.ChuckerTeam.Chucker:library:3.2.0"
+
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
 }
