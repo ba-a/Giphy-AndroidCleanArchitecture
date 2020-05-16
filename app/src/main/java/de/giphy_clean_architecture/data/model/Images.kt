@@ -1,7 +1,6 @@
 package de.giphy_clean_architecture.data.model
 
 data class Images(
-    val `480w_still`: WStill,
     val downsized: Downsized,
     val downsized_large: DownsizedLarge,
     val downsized_medium: DownsizedMedium,
@@ -23,6 +22,5 @@ data class Images(
     val original_mp4: OriginalMp4,
     val original_still: OriginalStill,
     val preview: Preview,
-    val preview_gif: PreviewGif,
-    val preview_webp: PreviewWebp
+    val preview_gif: PreviewGif
 )
