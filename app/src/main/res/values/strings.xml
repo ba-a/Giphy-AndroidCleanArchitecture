@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Giphy-AndroidCleanArchitecture</string>
+    <string name="trending_giphys_error">That\'s bad, an error happened</string>
 </resources>

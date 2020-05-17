@@ -50,6 +50,7 @@ dependencies {
     def timber_version = '4.7.1'
     def mockk_version = 'v1.10.0'
     def truth_version = "1.0.1"
+    def spinkit_version = "1.4.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -102,5 +103,7 @@ dependencies {
     debugImplementation "com.github.ChuckerTeam.Chucker:library:$chucker_version"
 
     implementation "com.jakewharton.timber:timber:$timber_version"
+
+    implementation "com.github.ybq:Android-SpinKit:$spinkit_version"
 
 }

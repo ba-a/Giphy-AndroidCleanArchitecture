@@ -3,7 +3,10 @@ package de.giphy_clean_architecture.presentation.trending
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import de.giphy_androidcleanarchitecture.R
@@ -30,12 +33,31 @@ class TrendingGiphyFragment : Fragment() {
 
         onStates(trendingGiphyViewModel) { state ->
             when (state) {
-                // TODO implement other states
-                is TrendingGiphyState.ShowSuccess -> showTrendingGiphys(state.trendingGiphys)
+                is TrendingGiphyState.ShowLoading -> showLoading()
+                is TrendingGiphyState.ShowSuccess -> {
+                    hideLoading()
+                    showTrendingGiphys(state.trendingGiphys)
+                }
+                is TrendingGiphyState.ShowError -> {
+                    hideLoading()
+                    showError()
+                }
             }
         }
 
         trendingGiphyViewModel.getTrendingGiphys()
+    }
+
+    private fun showError() {
+        Toast.makeText(context, getString(R.string.trending_giphys_error), Toast.LENGTH_LONG).show()
+    }
+
+    private fun showLoading() {
+        spin_kit_trendingGiphy.visibility = VISIBLE
+    }
+
+    private fun hideLoading() {
+        spin_kit_trendingGiphy.visibility = GONE
     }
 
     private fun initRecyclerView() {
@@ -47,6 +69,5 @@ class TrendingGiphyFragment : Fragment() {
         (recyclerView_trending_giphy.adapter as TrendingGiphyAdapter).trendingGiphys =
             giphys
         (recyclerView_trending_giphy.adapter as TrendingGiphyAdapter).notifyDataSetChanged()
-
     }
 }
