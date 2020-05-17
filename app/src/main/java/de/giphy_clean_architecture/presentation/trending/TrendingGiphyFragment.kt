@@ -13,9 +13,9 @@ import kotlinx.android.synthetic.main.giphy_trending_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class GiphyTrendingFragment : Fragment() {
+class TrendingGiphyFragment : Fragment() {
 
-    private val giphyTrendingViewModel: GiphyTrendingViewModel by viewModel()
+    private val trendingGiphyViewModel: TrendingGiphyViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,25 +28,25 @@ class GiphyTrendingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
 
-        onStates(giphyTrendingViewModel) { state ->
+        onStates(trendingGiphyViewModel) { state ->
             when (state) {
                 // TODO implement other states
-                is GiphyTrendingState.ShowSuccess -> showTrendingGiphys(state.trendingGiphys)
+                is TrendingGiphyState.ShowSuccess -> showTrendingGiphys(state.trendingGiphys)
             }
         }
 
-        giphyTrendingViewModel.getTrendingGiphys()
+        trendingGiphyViewModel.getTrendingGiphys()
     }
 
     private fun initRecyclerView() {
         recyclerView_trending_giphy.layoutManager = GridLayoutManager(context, 3)
-        recyclerView_trending_giphy.adapter = GiphyTrendingAdapter(emptyList())
+        recyclerView_trending_giphy.adapter = TrendingGiphyAdapter(emptyList())
     }
 
     private fun showTrendingGiphys(giphys: List<Giphy>) {
-        (recyclerView_trending_giphy.adapter as GiphyTrendingAdapter).trendingGiphys =
+        (recyclerView_trending_giphy.adapter as TrendingGiphyAdapter).trendingGiphys =
             giphys
-        (recyclerView_trending_giphy.adapter as GiphyTrendingAdapter).notifyDataSetChanged()
+        (recyclerView_trending_giphy.adapter as TrendingGiphyAdapter).notifyDataSetChanged()
 
     }
 }

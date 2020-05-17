@@ -7,13 +7,11 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.giphy_androidcleanarchitecture.R
-import de.giphy_clean_architecture.data.model.Data
-import de.giphy_clean_architecture.data.model.GiphyTrends
 import de.giphy_clean_architecture.domain.model.Giphy
 import kotlinx.android.synthetic.main.item_trending_giphy.view.*
 
-class GiphyTrendingAdapter(var trendingGiphys: List<Giphy>) :
-    RecyclerView.Adapter<GiphyTrendingAdapter.TrendingGiphysViewHolder>() {
+class TrendingGiphyAdapter(var trendingGiphys: List<Giphy>) :
+    RecyclerView.Adapter<TrendingGiphyAdapter.TrendingGiphysViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

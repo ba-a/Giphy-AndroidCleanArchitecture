@@ -5,11 +5,11 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import de.giphy_clean_architecture.data.repository.remote.GiphyTrendingRemoteSource
-import de.giphy_clean_architecture.data.repository.remote.mapper.GiphyTrendingRemoteMapper
+import de.giphy_clean_architecture.data.repository.remote.TrendingGiphyRemoteSource
+import de.giphy_clean_architecture.data.repository.remote.mapper.TrendingGiphyRemoteMapper
 import de.giphy_clean_architecture.data.service.ApiErrorHandle
 import de.giphy_clean_architecture.data.service.ApiService
-import de.giphy_clean_architecture.domain.repository.GiphyTrendingRepository
+import de.giphy_clean_architecture.domain.repository.TrendingGiphyRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,13 +27,13 @@ val dataRemoteModule = module {
 
     single { ApiErrorHandle() }
 
-    single { GiphyTrendingRemoteMapper() }
+    single { TrendingGiphyRemoteMapper() }
 
-    single<GiphyTrendingRepository> {
-        GiphyTrendingRemoteSource(
+    single<TrendingGiphyRepository> {
+        TrendingGiphyRemoteSource(
             apiKey = "enter_api_key",
             apiService = get(),
-            mapper = get(),
+            trendingGiphyRemoteMapper = get(),
             appDispatchers = get(),
             apiErrorHandle = get()
         )

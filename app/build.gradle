@@ -45,9 +45,11 @@ dependencies {
     def ktx_version = '1.2.0'
     def uniflow_version = '0.11.0'
     def stetho_version = '1.5.1'
-    def chucker = "3.2.0"
+    def chucker_version = "3.2.0"
     def okhttp_logging_interceptor_version = '3.12.1'
     def timber_version = '4.7.1'
+    def mockk_version = 'v1.10.0'
+    def truth_version = "1.0.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -92,8 +94,12 @@ dependencies {
 
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
 
+    // mockk
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "com.google.truth:truth:$truth_version"
+
     // Chucker
-    debugImplementation "com.github.ChuckerTeam.Chucker:library:3.2.0"
+    debugImplementation "com.github.ChuckerTeam.Chucker:library:$chucker_version"
 
     implementation "com.jakewharton.timber:timber:$timber_version"
 

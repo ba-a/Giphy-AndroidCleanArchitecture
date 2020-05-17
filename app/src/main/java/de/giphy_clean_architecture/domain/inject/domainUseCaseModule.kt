@@ -11,7 +11,7 @@ val domainUseCaseModule = module {
 
     single {
         TrendingGiphysUseCase(
-            giphyTrendingRepository = get(),
+            trendingGiphyRepository = get(),
             controlledRunner = ControlledRunner()
         )
     }

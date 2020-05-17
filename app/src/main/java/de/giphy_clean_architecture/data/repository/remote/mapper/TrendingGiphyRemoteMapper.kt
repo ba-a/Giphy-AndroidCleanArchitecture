@@ -4,11 +4,11 @@ import de.giphy_clean_architecture.data.model.GiphyTrends
 import de.giphy_clean_architecture.data.model.Mapper
 import de.giphy_clean_architecture.domain.model.Giphy
 
-class GiphyTrendingRemoteMapper : Mapper<GiphyTrends, List<Giphy>> {
+class TrendingGiphyRemoteMapper : Mapper<GiphyTrends, List<Giphy>> {
 
     override fun invoke(input: GiphyTrends): List<Giphy> {
         val giphyList = mutableListOf<Giphy>()
-        input.data.forEach {
+        input.data?.forEach {
             giphyList.add(Giphy(
                 height = it.images.fixed_height.height.orEmpty(),
                 size = it.images.fixed_height.size.orEmpty(),

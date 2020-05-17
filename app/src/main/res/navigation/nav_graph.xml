@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/giphyTrendingFragment"
-        android:name="de.giphy_clean_architecture.presentation.trending.GiphyTrendingFragment"
+        android:name="de.giphy_clean_architecture.presentation.trending.TrendingGiphyFragment"
         android:label="giphy_trending_fragment"
         tools:layout="@layout/giphy_trending_fragment" />
 </navigation>
