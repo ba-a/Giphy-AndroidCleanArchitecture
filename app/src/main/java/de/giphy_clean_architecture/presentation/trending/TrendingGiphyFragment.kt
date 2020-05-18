@@ -29,8 +29,17 @@ class TrendingGiphyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Init views
         initRecyclerView()
 
+        // Init state handling
+        initStateHandling()
+
+        // Start loading data
+        trendingGiphyViewModel.getTrendingGiphys()
+    }
+
+    private fun initStateHandling() {
         onStates(trendingGiphyViewModel) { state ->
             when (state) {
                 is TrendingGiphyState.ShowLoading -> showLoading()
@@ -44,8 +53,6 @@ class TrendingGiphyFragment : Fragment() {
                 }
             }
         }
-
-        trendingGiphyViewModel.getTrendingGiphys()
     }
 
     private fun showError() {
@@ -66,8 +73,7 @@ class TrendingGiphyFragment : Fragment() {
     }
 
     private fun showTrendingGiphys(giphys: List<Giphy>) {
-        (recyclerView_trending_giphy.adapter as TrendingGiphyAdapter).trendingGiphys =
-            giphys
+        (recyclerView_trending_giphy.adapter as TrendingGiphyAdapter).trendingGiphys = giphys
         (recyclerView_trending_giphy.adapter as TrendingGiphyAdapter).notifyDataSetChanged()
     }
 }

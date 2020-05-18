@@ -4,7 +4,6 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
-import com.facebook.stetho.okhttp3.StethoInterceptor
 import de.giphy_clean_architecture.data.repository.remote.TrendingGiphyRemoteSource
 import de.giphy_clean_architecture.data.repository.remote.mapper.TrendingGiphyRemoteMapper
 import de.giphy_clean_architecture.data.service.ApiErrorHandle
@@ -56,7 +55,6 @@ fun createHttpClient(context: Context): OkHttpClient {
     val okHttpClientBuilder = OkHttpClient.Builder()
         .connectTimeout(SERVICE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(SERVICE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        .addNetworkInterceptor(StethoInterceptor())
         .addInterceptor(interceptor)
         .addNetworkInterceptor(createHttpInspectorInterceptor(context))
 
