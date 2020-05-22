@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("v1/gifs/trending?limit=12&rating=G")
+    @GET("v1/gifs/trending?limit=25&rating=G")
     suspend fun getTrendingGiphsys(@Query("api_key") api_key: String): GiphyTrends
 
 }
