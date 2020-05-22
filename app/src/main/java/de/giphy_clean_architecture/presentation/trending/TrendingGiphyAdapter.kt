@@ -1,5 +1,6 @@
 package de.giphy_clean_architecture.presentation.trending
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import com.bumptech.glide.Glide
 import de.giphy_androidcleanarchitecture.R
 import de.giphy_clean_architecture.domain.model.Giphy
 import kotlinx.android.synthetic.main.item_trending_giphy.view.*
+import java.util.*
 
 class TrendingGiphyAdapter(var trendingGiphys: List<Giphy>) :
     RecyclerView.Adapter<TrendingGiphyAdapter.TrendingGiphysViewHolder>() {
@@ -35,6 +37,9 @@ class TrendingGiphyAdapter(var trendingGiphys: List<Giphy>) :
             itemView.imageView_trending_giphy
 
         fun displayGiphy(item: Giphy) {
+            val rnd = Random()
+            val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+            itemView.setBackgroundColor(color)
             Glide.with(itemView.context).asGif().load(item.url).into(imageViewArtist);
         }
     }

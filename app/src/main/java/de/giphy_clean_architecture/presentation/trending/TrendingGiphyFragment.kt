@@ -8,7 +8,6 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import de.giphy_androidcleanarchitecture.R
 import de.giphy_clean_architecture.domain.model.Giphy
 import io.uniflow.androidx.flow.onStates
@@ -19,6 +18,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class TrendingGiphyFragment : Fragment() {
 
     private val trendingGiphyViewModel: TrendingGiphyViewModel by viewModel()
+    private var trendingGiphyAdapter: TrendingGiphyAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,12 +68,16 @@ class TrendingGiphyFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        recyclerView_trending_giphy.layoutManager = GridLayoutManager(context, 3)
-        recyclerView_trending_giphy.adapter = TrendingGiphyAdapter(emptyList())
+        trendingGiphyAdapter = TrendingGiphyAdapter((emptyList()))
+        viewPager_trending_giphy.adapter = trendingGiphyAdapter
+        viewPager_trending_giphy.offscreenPageLimit = 5
+        // Create an object of page transformer
+        val pageTransformer = ParallaxPageTransformer()
+        viewPager_trending_giphy.setPageTransformer(pageTransformer)
     }
 
     private fun showTrendingGiphys(giphys: List<Giphy>) {
-        (recyclerView_trending_giphy.adapter as TrendingGiphyAdapter).trendingGiphys = giphys
-        (recyclerView_trending_giphy.adapter as TrendingGiphyAdapter).notifyDataSetChanged()
+        trendingGiphyAdapter?.trendingGiphys = giphys
+        trendingGiphyAdapter?.notifyDataSetChanged()
     }
 }
