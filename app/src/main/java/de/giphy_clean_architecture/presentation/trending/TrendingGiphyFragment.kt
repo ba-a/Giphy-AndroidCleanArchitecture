@@ -72,7 +72,7 @@ class TrendingGiphyFragment : Fragment() {
         viewPager_trending_giphy.adapter = trendingGiphyAdapter
         viewPager_trending_giphy.offscreenPageLimit = 5
         // Create an object of page transformer
-        val pageTransformer = ParallaxPageTransformer()
+        val pageTransformer = TrendingGiphyParallaxPageTransformer()
         viewPager_trending_giphy.setPageTransformer(pageTransformer)
     }
 
