@@ -6,4 +6,10 @@
         android:title="Trending"
         android:titleCondensed="string" />
 
+    <item
+        android:id="@+id/searchGiphyFragment"
+        android:icon="@drawable/ic_search"
+        android:title="Suche"
+        android:titleCondensed="string" />
+
 </menu>
