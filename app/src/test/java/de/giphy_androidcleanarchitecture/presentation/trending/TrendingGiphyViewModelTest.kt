@@ -11,16 +11,9 @@ import de.giphy_clean_architecture.presentation.trending.TrendingGiphyState
 import de.giphy_clean_architecture.presentation.trending.TrendingGiphyViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
-import io.uniflow.android.test.SimpleObserver
-import io.uniflow.android.test.TestViewObserver
-import io.uniflow.core.flow.data.UIState
-import io.uniflow.core.logger.SimpleMessageLogger
-import io.uniflow.core.logger.UniFlowLogger
-import io.uniflow.core.logger.UniFlowLoggerTestRule
 import io.uniflow.test.rule.TestDispatchersRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
-import org.junit.ClassRule
 import org.junit.Rule
 import org.junit.Test
 
