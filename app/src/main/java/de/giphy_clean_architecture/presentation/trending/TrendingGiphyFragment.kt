@@ -42,7 +42,9 @@ class TrendingGiphyFragment : Fragment() {
     private fun initStateHandling() {
         onStates(trendingGiphyViewModel) { state ->
             when (state) {
-                is TrendingGiphyState.ShowLoading -> showLoading()
+                is TrendingGiphyState.Loading -> {
+                    showLoading()
+                }
                 is TrendingGiphyState.ShowSuccess -> {
                     hideLoading()
                     showTrendingGiphys(state.trendingGiphys)

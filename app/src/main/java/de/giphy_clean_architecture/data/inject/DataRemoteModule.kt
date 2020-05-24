@@ -1,4 +1,4 @@
-package de.giphy_clean_architecture.data
+package de.giphy_clean_architecture.data.inject
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
@@ -20,7 +20,11 @@ import java.util.concurrent.TimeUnit
 
 
 val dataRemoteModule = module {
-    single { createRetrofit(androidContext()) }
+    single {
+        createRetrofit(
+            androidContext()
+        )
+    }
 
     single { get<Retrofit>().create(ApiService::class.java) }
 
@@ -56,7 +60,11 @@ fun createHttpClient(context: Context): OkHttpClient {
         .connectTimeout(SERVICE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(SERVICE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
-        .addNetworkInterceptor(createHttpInspectorInterceptor(context))
+        .addNetworkInterceptor(
+            createHttpInspectorInterceptor(
+                context
+            )
+        )
 
     return okHttpClientBuilder.build()
 }

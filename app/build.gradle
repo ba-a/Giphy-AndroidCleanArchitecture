@@ -47,6 +47,7 @@ dependencies {
     def truth_version = "1.0.1"
     def spinkit_version = "1.4.0"
     def viewpager_version = "1.0.0"
+    def androidxArch_version = "2.1.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -89,9 +90,16 @@ dependencies {
     implementation "io.uniflow:uniflow-androidx:$uniflow_version"
     testImplementation "io.uniflow:uniflow-androidx-test:$uniflow_version"
 
+    implementation "io.uniflow:uniflow-core:$uniflow_version"
+    testImplementation "io.uniflow:uniflow-test:$uniflow_version"
+
+
     // mockk
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "com.google.truth:truth:$truth_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    testImplementation "androidx.arch.core:core-testing:$androidxArch_version"
+
 
     // Chucker
     debugImplementation "com.github.ChuckerTeam.Chucker:library:$chucker_version"
