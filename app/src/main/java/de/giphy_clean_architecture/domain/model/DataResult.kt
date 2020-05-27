@@ -13,6 +13,7 @@ data class ErrorModel(
 ) {
     enum class ErrorType {
         FULL_SCREEN,
-        HINT
+        HINT,
+        IGNORE
     }
 }

@@ -4,10 +4,12 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
+import de.giphy_clean_architecture.data.repository.remote.SearchGiphysRemoteRepository
 import de.giphy_clean_architecture.data.repository.remote.TrendingGiphyRemoteSource
 import de.giphy_clean_architecture.data.repository.remote.mapper.TrendingGiphyRemoteMapper
-import de.giphy_clean_architecture.data.service.ApiErrorHandle
+import de.giphy_clean_architecture.data.service.ApiErrorHandler
 import de.giphy_clean_architecture.data.service.ApiService
+import de.giphy_clean_architecture.domain.repository.SearchGiphyRepository
 import de.giphy_clean_architecture.domain.repository.TrendingGiphyRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -28,7 +30,7 @@ val dataRemoteModule = module {
 
     single { get<Retrofit>().create(ApiService::class.java) }
 
-    single { ApiErrorHandle() }
+    single { ApiErrorHandler() }
 
     single { TrendingGiphyRemoteMapper() }
 
@@ -38,7 +40,17 @@ val dataRemoteModule = module {
             apiService = get(),
             trendingGiphyRemoteMapper = get(),
             appDispatchers = get(),
-            apiErrorHandle = get()
+            apiErrorHandler = get()
+        )
+    }
+
+    single<SearchGiphyRepository> {
+        SearchGiphysRemoteRepository(
+            apiKey = "enter_api_key",
+            apiService = get(),
+            trendingGiphyRemoteMapper = get(),
+            appDispatchers = get(),
+            apiErrorHandler = get()
         )
     }
 }

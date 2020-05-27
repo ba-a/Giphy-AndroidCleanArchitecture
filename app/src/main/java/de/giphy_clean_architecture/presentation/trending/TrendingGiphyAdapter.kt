@@ -40,7 +40,7 @@ class TrendingGiphyAdapter(var trendingGiphys: List<Giphy>) :
             val rnd = Random()
             val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
             itemView.setBackgroundColor(color)
-            Glide.with(itemView.context).asGif().load(item.url).into(imageViewArtist);
+            Glide.with(itemView.context).asGif().load(item.url).into(imageViewArtist)
         }
     }
 }

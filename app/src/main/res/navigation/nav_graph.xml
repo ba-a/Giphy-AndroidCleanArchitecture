@@ -10,6 +10,7 @@
         android:name="de.giphy_clean_architecture.presentation.trending.TrendingGiphyFragment"
         android:label="giphy_trending_fragment"
         tools:layout="@layout/giphy_trending_fragment" />
+
     <fragment
         android:id="@+id/searchGiphyFragment"
         android:name="de.giphy_clean_architecture.presentation.search.SearchGiphyFragment"

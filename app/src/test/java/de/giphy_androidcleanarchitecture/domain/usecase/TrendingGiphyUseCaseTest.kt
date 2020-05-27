@@ -1,7 +1,7 @@
 package de.giphy_androidcleanarchitecture.domain.usecase
 
 import com.google.common.truth.Truth.assertThat
-import de.giphy_clean_architecture.data.helper.ControlledRunner
+import de.giphy_clean_architecture.domain.helper.ControlledRunner
 import de.giphy_clean_architecture.domain.model.DataResult
 import de.giphy_clean_architecture.domain.model.ErrorModel
 import de.giphy_clean_architecture.domain.model.Giphy

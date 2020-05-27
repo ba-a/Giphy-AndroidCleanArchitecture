@@ -6,23 +6,22 @@ import de.giphy_clean_architecture.data.service.ApiErrorHandler
 import de.giphy_clean_architecture.data.service.ApiService
 import de.giphy_clean_architecture.domain.model.DataResult
 import de.giphy_clean_architecture.domain.model.Giphy
-import de.giphy_clean_architecture.domain.repository.TrendingGiphyRepository
+import de.giphy_clean_architecture.domain.repository.SearchGiphyRepository
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
-class TrendingGiphyRemoteSource(
+class SearchGiphysRemoteRepository(
     private val apiKey: String,
     private val apiService: ApiService,
     private val trendingGiphyRemoteMapper: TrendingGiphyRemoteMapper,
     private val appDispatchers: AppDispatchers,
     private val apiErrorHandler: ApiErrorHandler
-) : TrendingGiphyRepository {
+) : SearchGiphyRepository {
 
-    override suspend fun getTrending(): DataResult<List<Giphy>> =
+    override suspend fun searchForGiphys(searchInput: String): DataResult<List<Giphy>> =
         withContext(appDispatchers.io) {
             try {
-                val trendingGiphysRemote = apiService.getTrendingGiphys(apiKey)
-                DataResult.Success(trendingGiphyRemoteMapper.invoke(trendingGiphysRemote))
+                val searchGyphisRemote = apiService.searchForGiphys(apiKey, searchInput)
+                DataResult.Success(trendingGiphyRemoteMapper.invoke(searchGyphisRemote))
             } catch (e: Exception) {
                 DataResult.Error(apiErrorHandler.traceErrorException(e))
             }
