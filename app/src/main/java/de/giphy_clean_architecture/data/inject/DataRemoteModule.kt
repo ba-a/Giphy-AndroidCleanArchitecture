@@ -4,6 +4,7 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
+import de.giphy_androidcleanarchitecture.BuildConfig
 import de.giphy_clean_architecture.data.repository.remote.SearchGiphysRemoteRepository
 import de.giphy_clean_architecture.data.repository.remote.TrendingGiphyRemoteSource
 import de.giphy_clean_architecture.data.repository.remote.mapper.TrendingGiphyRemoteMapper
@@ -36,7 +37,7 @@ val dataRemoteModule = module {
 
     single<TrendingGiphyRepository> {
         TrendingGiphyRemoteSource(
-            apiKey = "enter_api_key",
+            apiKey = BuildConfig.API_KEY,
             apiService = get(),
             trendingGiphyRemoteMapper = get(),
             appDispatchers = get(),
@@ -46,7 +47,7 @@ val dataRemoteModule = module {
 
     single<SearchGiphyRepository> {
         SearchGiphysRemoteRepository(
-            apiKey = "enter_api_key",
+            apiKey = BuildConfig.API_KEY,
             apiService = get(),
             trendingGiphyRemoteMapper = get(),
             appDispatchers = get(),
