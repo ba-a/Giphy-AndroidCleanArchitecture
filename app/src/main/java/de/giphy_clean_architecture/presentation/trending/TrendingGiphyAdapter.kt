@@ -8,12 +8,19 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.giphy_androidcleanarchitecture.R
+import de.giphy_clean_architecture.data.inject.GlideApp
 import de.giphy_clean_architecture.domain.model.Giphy
 import kotlinx.android.synthetic.main.item_trending_giphy.view.*
 import java.util.*
 
+interface TrendingClickListener {
+    fun onTrendingItemClick(giphyUrl: String, imageView: ImageView)
+}
+
 class TrendingGiphyAdapter(var trendingGiphys: List<Giphy>) :
     RecyclerView.Adapter<TrendingGiphyAdapter.TrendingGiphysViewHolder>() {
+
+    var clickListener: TrendingClickListener? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,7 +33,7 @@ class TrendingGiphyAdapter(var trendingGiphys: List<Giphy>) :
 
     override fun onBindViewHolder(viewHolder: TrendingGiphysViewHolder, position: Int) {
         val item = trendingGiphys[position]
-        viewHolder.displayGiphy(item)
+        viewHolder.displayGiphy(item, clickListener)
     }
 
     override fun getItemCount(): Int = trendingGiphys.size
@@ -36,11 +43,15 @@ class TrendingGiphyAdapter(var trendingGiphys: List<Giphy>) :
         private val imageViewArtist: ImageView =
             itemView.imageView_trending_giphy
 
-        fun displayGiphy(item: Giphy) {
+        fun displayGiphy(item: Giphy, clickListener: TrendingClickListener?) {
             val rnd = Random()
+            itemView.imageView_trending_giphy.translationX = 0f
             val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
             itemView.setBackgroundColor(color)
-            Glide.with(itemView.context).asGif().load(item.url).into(imageViewArtist)
+            GlideApp.with(itemView.context).asGif().load(item.url).into(imageViewArtist)
+            itemView.setOnClickListener {
+                clickListener?.onTrendingItemClick(item.url, imageViewArtist)
+            }
         }
     }
 }

@@ -6,16 +6,21 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import de.giphy_androidcleanarchitecture.R
 import de.giphy_clean_architecture.domain.model.Giphy
 import io.uniflow.androidx.flow.onStates
 import kotlinx.android.synthetic.main.giphy_trending_fragment.*
+import kotlinx.android.synthetic.main.item_trending_giphy.*
+import kotlinx.android.synthetic.main.item_trending_giphy.view.*
+import kotlinx.android.synthetic.main.item_trending_giphy.view.imageView_trending_giphy
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class TrendingGiphyFragment : Fragment() {
+class TrendingGiphyFragment : Fragment(), TrendingClickListener {
 
     private val trendingGiphyViewModel: TrendingGiphyViewModel by viewModel()
     private var trendingGiphyAdapter: TrendingGiphyAdapter? = null
@@ -71,15 +76,22 @@ class TrendingGiphyFragment : Fragment() {
 
     private fun initRecyclerView() {
         trendingGiphyAdapter = TrendingGiphyAdapter((emptyList()))
+        trendingGiphyAdapter!!.clickListener = this
         viewPager_trending_giphy.adapter = trendingGiphyAdapter
         viewPager_trending_giphy.offscreenPageLimit = 5
-        // Create an object of page transformer
+
         val pageTransformer = TrendingGiphyParallaxPageTransformer()
+
         viewPager_trending_giphy.setPageTransformer(pageTransformer)
     }
 
     private fun showTrendingGiphys(giphys: List<Giphy>) {
         trendingGiphyAdapter?.trendingGiphys = giphys
         trendingGiphyAdapter?.notifyDataSetChanged()
+    }
+
+    override fun onTrendingItemClick(giphyUrl: String, imageView: ImageView) {
+        val action = TrendingGiphyFragmentDirections.actionGiphyTrendingFragmentToGiphyDetailFragment(giphyUrl)
+        findNavController().navigate(action)
     }
 }

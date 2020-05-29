@@ -6,8 +6,11 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import de.giphy_androidcleanarchitecture.R
 import de.giphy_clean_architecture.domain.model.Giphy
@@ -16,7 +19,7 @@ import kotlinx.android.synthetic.main.search_fragment.*
 import kotlinx.android.synthetic.main.search_fragment.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class SearchGiphyFragment : Fragment() {
+class SearchGiphyFragment : Fragment(), SearchClickListener {
 
     private val searchViewModel: SearchGiphyViewModel by viewModel()
 
@@ -35,8 +38,10 @@ class SearchGiphyFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        recyclerView_searchFragment.setLayoutManager(GridLayoutManager(context, 2))
-        recyclerView_searchFragment.adapter = SearchAdapter(emptyList())
+        recyclerView_searchFragment.layoutManager = GridLayoutManager(context, 2)
+        val searchAdapter = SearchAdapter(emptyList())
+        searchAdapter.searchClickListener = this
+        recyclerView_searchFragment.adapter = searchAdapter
     }
 
     private fun initSearch(view: View) {
@@ -99,5 +104,10 @@ class SearchGiphyFragment : Fragment() {
 
     private fun hideLoading() {
         spin_kit_search.visibility = View.GONE
+    }
+
+    override fun onSearchItemClick(giphyUrl: String, imageView: ImageView) {
+        val action = SearchGiphyFragmentDirections.actionSearchGiphyFragmentToGiphyDetailFragment(giphyUrl)
+        findNavController().navigate(action)
     }
 }

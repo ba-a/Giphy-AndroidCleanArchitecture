@@ -9,11 +9,37 @@
         android:id="@+id/giphyTrendingFragment"
         android:name="de.giphy_clean_architecture.presentation.trending.TrendingGiphyFragment"
         android:label="giphy_trending_fragment"
-        tools:layout="@layout/giphy_trending_fragment" />
+        tools:layout="@layout/giphy_trending_fragment" >
+        <action
+            android:id="@+id/action_giphyTrendingFragment_to_giphyDetailFragment"
+            app:destination="@id/giphyDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchGiphyFragment"
         android:name="de.giphy_clean_architecture.presentation.search.SearchGiphyFragment"
         android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment">
+        <action
+            android:id="@+id/action_searchGiphyFragment_to_giphyDetailFragment"
+            app:destination="@id/giphyDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/giphyDetailFragment"
+        android:name="de.giphy_clean_architecture.presentation.detail.GiphyDetailFragment"
+        android:label="GiphyDetailFragment"
+        tools:layout="@layout/fragment_giphy_detail">
+        <argument
+            android:name="giphyUrl"
+            app:argType="string" />
+    </fragment>
 </navigation>
