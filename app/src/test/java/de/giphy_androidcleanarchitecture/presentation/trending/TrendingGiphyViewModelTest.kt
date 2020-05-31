@@ -1,9 +1,6 @@
 package de.giphy_androidcleanarchitecture.presentation.trending
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import de.giphy_androidcleanarchitecture.FixedTestViewObserver
 import de.giphy_androidcleanarchitecture.base.BaseTest
-import de.giphy_androidcleanarchitecture.createTestObserver
 import de.giphy_clean_architecture.domain.model.DataResult
 import de.giphy_clean_architecture.domain.model.ErrorModel
 import de.giphy_clean_architecture.domain.model.Giphy
@@ -12,17 +9,17 @@ import de.giphy_clean_architecture.presentation.trending.TrendingGiphyState
 import de.giphy_clean_architecture.presentation.trending.TrendingGiphyViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
-import io.uniflow.test.rule.TestDispatchersRule
+import io.uniflow.android.test.TestViewObserver
+import io.uniflow.android.test.createTestObserver
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class TrendingGiphyViewModelTest : BaseTest() {
     private val trendingGiphyUseCase: TrendingGiphysUseCase = mockk(relaxed = true)
     private lateinit var viewModel: TrendingGiphyViewModel
-    private lateinit var testObserver: FixedTestViewObserver
+    private lateinit var testObserver: TestViewObserver
 
     @Before
     fun setUp() {

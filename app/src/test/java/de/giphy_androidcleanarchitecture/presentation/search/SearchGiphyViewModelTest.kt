@@ -1,8 +1,6 @@
 package de.giphy_androidcleanarchitecture.presentation.search
 
-import de.giphy_androidcleanarchitecture.FixedTestViewObserver
 import de.giphy_androidcleanarchitecture.base.BaseTest
-import de.giphy_androidcleanarchitecture.createTestObserver
 import de.giphy_clean_architecture.domain.model.DataResult
 import de.giphy_clean_architecture.domain.model.ErrorModel
 import de.giphy_clean_architecture.domain.model.Giphy
@@ -11,6 +9,8 @@ import de.giphy_clean_architecture.presentation.search.SearchGiphyViewModel
 import de.giphy_clean_architecture.presentation.search.SearchState
 import io.mockk.coEvery
 import io.mockk.mockk
+import io.uniflow.android.test.TestViewObserver
+import io.uniflow.android.test.createTestObserver
 import io.uniflow.core.flow.data.UIState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -21,7 +21,7 @@ import org.junit.Test
 class SearchGiphyViewModelTest : BaseTest() {
     private val searchGiphysUseCase: SearchGiphysUseCase = mockk(relaxed = true)
     lateinit var viewModel: SearchGiphyViewModel
-    lateinit var testObserver: FixedTestViewObserver
+    lateinit var testObserver: TestViewObserver
 
     @Before
     fun setUp() {
