@@ -11,6 +11,8 @@ class SearchGiphyViewModel(
 
     fun onSearchInput(searchInput: String) = action {
         setState(SearchState.Loading)
+        val search = searchGiphysUseCase.searchGiphysForText(searchInput)
+
         when(val result = searchGiphysUseCase.searchGiphysForText(searchInput)) {
             is DataResult.Success -> setState { SearchState.ShowSuccess(result.value) }
             is DataResult.Error -> setState { SearchState.ShowError }

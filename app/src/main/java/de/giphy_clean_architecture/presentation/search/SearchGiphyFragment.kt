@@ -37,6 +37,26 @@ class SearchGiphyFragment : Fragment(), SearchClickListener {
         initStateHandling()
     }
 
+    private fun initStateHandling() {
+        onStates(searchViewModel) { state ->
+            when (state) {
+                is SearchState.Loading -> {
+                    clearAdapter()
+                    showLoading()
+                }
+                is SearchState.ShowSuccess -> {
+                    hideLoading()
+                    showSearchResult(state.searchResultGiphys)
+                }
+                is SearchState.ShowError -> {
+                    clearAdapter()
+                    hideLoading()
+                    showError()
+                }
+            }
+        }
+    }
+
     private fun initRecyclerView() {
         recyclerView_searchFragment.layoutManager = GridLayoutManager(context, 2)
         val searchAdapter = SearchAdapter(emptyList())
@@ -58,26 +78,6 @@ class SearchGiphyFragment : Fragment(), SearchClickListener {
                     searchViewModel.onSearchInput(fieldInput.toString())
             }
         })
-    }
-
-    private fun initStateHandling() {
-        onStates(searchViewModel) { state ->
-            when (state) {
-                is SearchState.Loading -> {
-                    clearAdapter()
-                    showLoading()
-                }
-                is SearchState.ShowSuccess -> {
-                    hideLoading()
-                    showSearchResult(state.searchResultGiphys)
-                }
-                is SearchState.ShowError -> {
-                    clearAdapter()
-                    hideLoading()
-                    showError()
-                }
-            }
-        }
     }
 
     private fun showSearchResult(searchResults: List<Giphy>) {

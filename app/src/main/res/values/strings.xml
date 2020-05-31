@@ -2,4 +2,5 @@
     <string name="app_name">Giphy-AndroidCleanArchitecture</string>
     <string name="trending_giphys_error">That\'s bad, an error happened</string>
     <string name="editText_search_hint">Suche</string>
+    <string name="share_giphy">Giphy</string>
 </resources>

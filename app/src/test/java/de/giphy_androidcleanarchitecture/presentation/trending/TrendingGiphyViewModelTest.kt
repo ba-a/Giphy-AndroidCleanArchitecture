@@ -2,6 +2,7 @@ package de.giphy_androidcleanarchitecture.presentation.trending
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import de.giphy_androidcleanarchitecture.FixedTestViewObserver
+import de.giphy_androidcleanarchitecture.base.BaseTest
 import de.giphy_androidcleanarchitecture.createTestObserver
 import de.giphy_clean_architecture.domain.model.DataResult
 import de.giphy_clean_architecture.domain.model.ErrorModel
@@ -18,22 +19,14 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class TrendingGiphyViewModelTest {
-    @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
-
-    @get:Rule
-    val testDispatchersRule = TestDispatchersRule()
-
-    val trendingGiphyUseCase : TrendingGiphysUseCase = mockk(relaxed = true)
-    lateinit var viewModel : TrendingGiphyViewModel
-    lateinit var testObserver: FixedTestViewObserver
+class TrendingGiphyViewModelTest : BaseTest() {
+    private val trendingGiphyUseCase: TrendingGiphysUseCase = mockk(relaxed = true)
+    private lateinit var viewModel: TrendingGiphyViewModel
+    private lateinit var testObserver: FixedTestViewObserver
 
     @Before
-    fun before() {
-        // create WeatherDataFlow instance with mocked WeatherRepository
+    fun setUp() {
         viewModel = TrendingGiphyViewModel(trendingGiphyUseCase)
-        // create test observer
         testObserver = viewModel.createTestObserver()
     }
 
@@ -44,7 +37,7 @@ class TrendingGiphyViewModelTest {
 
         viewModel.getTrendingGiphys()
 
-        testObserver.assertReceived (
+        testObserver.assertReceived(
             TrendingGiphyState.Loading,
             TrendingGiphyState.ShowSuccess(giphyData)
         )
@@ -52,10 +45,15 @@ class TrendingGiphyViewModelTest {
 
     @Test
     fun `error getting Giphys show error`() {
-        coEvery { trendingGiphyUseCase.getTrendingGiphys() } returns DataResult.Error(ErrorModel("No data", 404))
+        coEvery { trendingGiphyUseCase.getTrendingGiphys() } returns DataResult.Error(
+            ErrorModel(
+                "No data",
+                404
+            )
+        )
         viewModel.getTrendingGiphys()
 
-        testObserver.assertReceived (
+        testObserver.assertReceived(
             TrendingGiphyState.Loading,
             TrendingGiphyState.ShowError
         )

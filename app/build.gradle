@@ -15,11 +15,10 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "API_KEY", "\"some_api_key\""
+
+        buildConfigField "String", "API_KEY", "\"keqzSOaFEdtSgkfP15O9gScz4h4ARI3p\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-
     }
 
     buildTypes {
@@ -28,7 +27,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
