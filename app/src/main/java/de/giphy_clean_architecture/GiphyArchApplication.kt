@@ -18,6 +18,5 @@ class GiphyArchApplication : Application() {
         }
 
         Timber.plant(Timber.DebugTree())
-
     }
 }

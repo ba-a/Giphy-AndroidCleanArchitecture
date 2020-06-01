@@ -4,14 +4,14 @@ import de.giphy_clean_architecture.domain.model.DataResult
 import de.giphy_clean_architecture.domain.usecase.TrendingGiphysUseCase
 import io.uniflow.androidx.flow.AndroidDataFlow
 
-class TrendingGiphyViewModel(
+class TrendingGiphysViewModel(
     private val trendingGiphysUseCase: TrendingGiphysUseCase
-) : AndroidDataFlow(defaultState = TrendingGiphyState.Loading)  {
+) : AndroidDataFlow(defaultState = TrendingGiphysState.Loading)  {
 
     fun getTrendingGiphys() = action {
         when(val result = trendingGiphysUseCase.getTrendingGiphys()) {
-            is DataResult.Success -> setState { TrendingGiphyState.ShowSuccess(result.value) }
-            is DataResult.Error -> setState { TrendingGiphyState.ShowError }
+            is DataResult.Success -> setState { TrendingGiphysState.ShowSuccess(result.value) }
+            is DataResult.Error -> setState { TrendingGiphysState.ShowError }
         }
     }
 }

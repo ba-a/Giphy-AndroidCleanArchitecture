@@ -1,8 +1,8 @@
 package de.giphy_clean_architecture.presentation.inject
 
 import de.giphy_clean_architecture.presentation.detail.DetailGiphyViewModel
-import de.giphy_clean_architecture.presentation.search.SearchGiphyViewModel
-import de.giphy_clean_architecture.presentation.trending.TrendingGiphyViewModel
+import de.giphy_clean_architecture.presentation.search.SearchGiphysViewModel
+import de.giphy_clean_architecture.presentation.trending.TrendingGiphysViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,11 +12,11 @@ val presentationModule = module {
     //region ViewModel
 
     viewModel {
-        TrendingGiphyViewModel(trendingGiphysUseCase = get())
+        TrendingGiphysViewModel(trendingGiphysUseCase = get())
     }
 
     viewModel {
-        SearchGiphyViewModel(searchGiphysUseCase = get())
+        SearchGiphysViewModel(searchGiphysUseCase = get())
     }
 
     viewModel {

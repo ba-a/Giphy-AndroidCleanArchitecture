@@ -3,13 +3,13 @@
     <item
         android:id="@+id/giphyTrendingFragment"
         android:icon="@drawable/ic_trending"
-        android:title="Trending"
+        android:title="@string/trendingTitle"
         android:titleCondensed="string" />
 
     <item
         android:id="@+id/searchGiphyFragment"
         android:icon="@drawable/ic_search"
-        android:title="Suche"
+        android:title="@string/searchTitle"
         android:titleCondensed="string" />
 
 </menu>

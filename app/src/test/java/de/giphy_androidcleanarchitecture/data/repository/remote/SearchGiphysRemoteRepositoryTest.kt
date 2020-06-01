@@ -2,9 +2,9 @@ package de.giphy_androidcleanarchitecture.data.repository.remote
 
 import com.google.common.truth.Truth.assertThat
 import de.giphy_clean_architecture.AppDispatchers
-import de.giphy_clean_architecture.data.model.GiphyTrends
+import de.giphy_clean_architecture.data.model.GiphyResultList
 import de.giphy_clean_architecture.data.repository.remote.SearchGiphysRemoteRepository
-import de.giphy_clean_architecture.data.repository.remote.mapper.TrendingGiphyRemoteMapper
+import de.giphy_clean_architecture.data.repository.remote.mapper.GiphyRemoteMapper
 import de.giphy_clean_architecture.data.service.ApiErrorHandler
 import de.giphy_clean_architecture.data.service.ApiService
 import de.giphy_clean_architecture.domain.model.DataResult
@@ -27,7 +27,7 @@ class SearchGiphysRemoteRepositoryTest {
     }
 
     private val apiService = mockk<ApiService>(relaxUnitFun = true)
-    private val responseMapper = mockk<TrendingGiphyRemoteMapper>()
+    private val responseMapper = mockk<GiphyRemoteMapper>()
     private val apiErrorHandler = ApiErrorHandler()
 
     private lateinit var searchGiphysRemoteRepository: SearchGiphysRemoteRepository
@@ -45,7 +45,7 @@ class SearchGiphysRemoteRepositoryTest {
 
     @Test
     fun `searching for giphys should return giphy list`() = runBlocking {
-        val giphyResponse = mockkClass(GiphyTrends::class)
+        val giphyResponse = mockkClass(GiphyResultList::class)
         coEvery { apiService.searchForGiphys(any(), any()) } returns giphyResponse
 
         val giphy = mockkClass(Giphy::class)

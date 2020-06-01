@@ -5,7 +5,7 @@ import de.giphy_clean_architecture.domain.helper.ControlledRunner
 import de.giphy_clean_architecture.domain.model.DataResult
 import de.giphy_clean_architecture.domain.model.ErrorModel
 import de.giphy_clean_architecture.domain.model.Giphy
-import de.giphy_clean_architecture.domain.repository.TrendingGiphyRepository
+import de.giphy_clean_architecture.domain.repository.TrendingGiphysRepository
 import de.giphy_clean_architecture.domain.usecase.TrendingGiphysUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -15,9 +15,9 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class TrendingGiphyUseCaseTest {
+class TrendingGiphysUseCaseTest {
 
-    private val trendingGiphyRepository = mockk<TrendingGiphyRepository>()
+    private val trendingGiphyRepository = mockk<TrendingGiphysRepository>()
 
     private lateinit var controlledRunner: ControlledRunner<DataResult<List<Giphy>>>
     private lateinit var trendingUseCase: TrendingGiphysUseCase

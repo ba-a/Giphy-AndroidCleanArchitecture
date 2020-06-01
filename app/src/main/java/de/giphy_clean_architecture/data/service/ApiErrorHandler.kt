@@ -5,8 +5,6 @@ import retrofit2.HttpException
 import timber.log.Timber
 
 class ApiErrorHandler {
-    private val TAG = "ApiErrorHandle"
-
     fun traceErrorException(
         throwable: Throwable?
     ): ErrorModel? {
@@ -25,5 +23,9 @@ class ApiErrorHandler {
                 errorType = ErrorModel.ErrorType.FULL_SCREEN
             )
         }
+    }
+
+    companion object {
+        private const val TAG = "ApiErrorHandle"
     }
 }

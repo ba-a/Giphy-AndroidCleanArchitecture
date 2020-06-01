@@ -5,8 +5,8 @@ import de.giphy_clean_architecture.domain.model.DataResult
 import de.giphy_clean_architecture.domain.model.ErrorModel
 import de.giphy_clean_architecture.domain.model.Giphy
 import de.giphy_clean_architecture.domain.usecase.TrendingGiphysUseCase
-import de.giphy_clean_architecture.presentation.trending.TrendingGiphyState
-import de.giphy_clean_architecture.presentation.trending.TrendingGiphyViewModel
+import de.giphy_clean_architecture.presentation.trending.TrendingGiphysState
+import de.giphy_clean_architecture.presentation.trending.TrendingGiphysViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.uniflow.android.test.TestViewObserver
@@ -16,14 +16,14 @@ import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class TrendingGiphyViewModelTest : BaseTest() {
+class TrendingGiphysViewModelTest : BaseTest() {
     private val trendingGiphyUseCase: TrendingGiphysUseCase = mockk(relaxed = true)
-    private lateinit var viewModel: TrendingGiphyViewModel
+    private lateinit var viewModel: TrendingGiphysViewModel
     private lateinit var testObserver: TestViewObserver
 
     @Before
     fun setUp() {
-        viewModel = TrendingGiphyViewModel(trendingGiphyUseCase)
+        viewModel = TrendingGiphysViewModel(trendingGiphyUseCase)
         testObserver = viewModel.createTestObserver()
     }
 
@@ -35,8 +35,8 @@ class TrendingGiphyViewModelTest : BaseTest() {
         viewModel.getTrendingGiphys()
 
         testObserver.assertReceived(
-            TrendingGiphyState.Loading,
-            TrendingGiphyState.ShowSuccess(giphyData)
+            TrendingGiphysState.Loading,
+            TrendingGiphysState.ShowSuccess(giphyData)
         )
     }
 
@@ -51,8 +51,8 @@ class TrendingGiphyViewModelTest : BaseTest() {
         viewModel.getTrendingGiphys()
 
         testObserver.assertReceived(
-            TrendingGiphyState.Loading,
-            TrendingGiphyState.ShowError
+            TrendingGiphysState.Loading,
+            TrendingGiphysState.ShowError
         )
     }
 }

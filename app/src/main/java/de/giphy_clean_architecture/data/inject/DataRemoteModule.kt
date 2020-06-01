@@ -6,12 +6,12 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import de.giphy_androidcleanarchitecture.BuildConfig
 import de.giphy_clean_architecture.data.repository.remote.SearchGiphysRemoteRepository
-import de.giphy_clean_architecture.data.repository.remote.TrendingGiphyRemoteSource
-import de.giphy_clean_architecture.data.repository.remote.mapper.TrendingGiphyRemoteMapper
+import de.giphy_clean_architecture.data.repository.remote.TrendingGiphysRemoteSource
+import de.giphy_clean_architecture.data.repository.remote.mapper.GiphyRemoteMapper
 import de.giphy_clean_architecture.data.service.ApiErrorHandler
 import de.giphy_clean_architecture.data.service.ApiService
-import de.giphy_clean_architecture.domain.repository.SearchGiphyRepository
-import de.giphy_clean_architecture.domain.repository.TrendingGiphyRepository
+import de.giphy_clean_architecture.domain.repository.SearchGiphysRepository
+import de.giphy_clean_architecture.domain.repository.TrendingGiphysRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,23 +33,23 @@ val dataRemoteModule = module {
 
     single { ApiErrorHandler() }
 
-    single { TrendingGiphyRemoteMapper() }
+    single { GiphyRemoteMapper() }
 
-    single<TrendingGiphyRepository> {
-        TrendingGiphyRemoteSource(
+    single<TrendingGiphysRepository> {
+        TrendingGiphysRemoteSource(
             apiKey = BuildConfig.API_KEY,
             apiService = get(),
-            trendingGiphyRemoteMapper = get(),
+            giphyRemoteMapper = get(),
             appDispatchers = get(),
             apiErrorHandler = get()
         )
     }
 
-    single<SearchGiphyRepository> {
+    single<SearchGiphysRepository> {
         SearchGiphysRemoteRepository(
             apiKey = BuildConfig.API_KEY,
             apiService = get(),
-            trendingGiphyRemoteMapper = get(),
+            giphyRemoteMapper = get(),
             appDispatchers = get(),
             apiErrorHandler = get()
         )

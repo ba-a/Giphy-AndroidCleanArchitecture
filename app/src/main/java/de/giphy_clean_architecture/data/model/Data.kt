@@ -6,7 +6,7 @@ data class Data(
     val content_url: String?,
     val embed_url: String?,
     val id: String?,
-    val images: Images,
+    val images: Images?,
     val import_datetime: String?,
     val is_sticker: Int,
     val rating: String?,

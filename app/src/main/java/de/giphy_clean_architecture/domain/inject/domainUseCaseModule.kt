@@ -12,7 +12,7 @@ val domainUseCaseModule = module {
 
     single {
         TrendingGiphysUseCase(
-            trendingGiphyRepository = get(),
+            trendingGiphysRepository = get(),
             controlledRunner = ControlledRunner()
         )
     }

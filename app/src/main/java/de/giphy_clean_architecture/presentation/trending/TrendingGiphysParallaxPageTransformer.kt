@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.item_trending_giphy.view.*
 import kotlinx.android.synthetic.main.item_trending_giphy.view.imageView_trending_giphy
 
 
-class TrendingGiphyParallaxPageTransformer : ViewPager2.PageTransformer {
+class TrendingGiphysParallaxPageTransformer : ViewPager2.PageTransformer {
 
     override fun transformPage(view: View, position: Float) {
         val pageWidth: Int = view.width

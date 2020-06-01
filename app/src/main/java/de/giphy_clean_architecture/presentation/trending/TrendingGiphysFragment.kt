@@ -12,17 +12,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import de.giphy_androidcleanarchitecture.R
 import de.giphy_clean_architecture.domain.model.Giphy
+import de.giphy_clean_architecture.presentation.MainActivity
 import io.uniflow.androidx.flow.onStates
 import kotlinx.android.synthetic.main.giphy_trending_fragment.*
-import kotlinx.android.synthetic.main.item_trending_giphy.*
-import kotlinx.android.synthetic.main.item_trending_giphy.view.*
-import kotlinx.android.synthetic.main.item_trending_giphy.view.imageView_trending_giphy
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class TrendingGiphyFragment : Fragment(), TrendingClickListener {
+class TrendingGiphysFragment : Fragment(), TrendingClickListener {
 
-    private val trendingGiphyViewModel: TrendingGiphyViewModel by viewModel()
+    private val trendingGiphysViewModel: TrendingGiphysViewModel by viewModel()
     private var trendingGiphyAdapter: TrendingGiphyAdapter? = null
 
     override fun onCreateView(
@@ -34,6 +32,7 @@ class TrendingGiphyFragment : Fragment(), TrendingClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity!! as MainActivity).supportActionBar!!.title = getString(R.string.trendingTitle)
         // Init views
         initRecyclerView()
 
@@ -41,20 +40,20 @@ class TrendingGiphyFragment : Fragment(), TrendingClickListener {
         initStateHandling()
 
         // Start loading data
-        trendingGiphyViewModel.getTrendingGiphys()
+        trendingGiphysViewModel.getTrendingGiphys()
     }
 
     private fun initStateHandling() {
-        onStates(trendingGiphyViewModel) { state ->
+        onStates(trendingGiphysViewModel) { state ->
             when (state) {
-                is TrendingGiphyState.Loading -> {
+                is TrendingGiphysState.Loading -> {
                     showLoading()
                 }
-                is TrendingGiphyState.ShowSuccess -> {
+                is TrendingGiphysState.ShowSuccess -> {
                     hideLoading()
                     showTrendingGiphys(state.trendingGiphys)
                 }
-                is TrendingGiphyState.ShowError -> {
+                is TrendingGiphysState.ShowError -> {
                     hideLoading()
                     showError()
                 }
@@ -80,7 +79,7 @@ class TrendingGiphyFragment : Fragment(), TrendingClickListener {
         viewPager_trending_giphy.adapter = trendingGiphyAdapter
         viewPager_trending_giphy.offscreenPageLimit = 5
 
-        val pageTransformer = TrendingGiphyParallaxPageTransformer()
+        val pageTransformer = TrendingGiphysParallaxPageTransformer()
 
         viewPager_trending_giphy.setPageTransformer(pageTransformer)
     }
@@ -91,7 +90,7 @@ class TrendingGiphyFragment : Fragment(), TrendingClickListener {
     }
 
     override fun onTrendingItemClick(giphyUrl: String, imageView: ImageView) {
-        val action = TrendingGiphyFragmentDirections.actionGiphyTrendingFragmentToGiphyDetailFragment(giphyUrl)
+        val action = TrendingGiphysFragmentDirections.actionGiphyTrendingFragmentToGiphyDetailFragment(giphyUrl)
         findNavController().navigate(action)
     }
 }
