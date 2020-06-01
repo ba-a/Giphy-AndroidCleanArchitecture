@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/giphyTrendingFragment"
-        android:name="de.giphy_clean_architecture.presentation.trending.TrendingGiphysFragment"
+        android:name="de.abauer.giphy_clean_architecture.presentation.trending.TrendingGiphysFragment"
         android:label="giphy_trending_fragment"
         tools:layout="@layout/giphy_trending_fragment" >
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/searchGiphyFragment"
-        android:name="de.giphy_clean_architecture.presentation.search.SearchGiphysFragment"
+        android:name="de.abauer.giphy_clean_architecture.presentation.search.SearchGiphysFragment"
         android:label="search_fragment"
         tools:layout="@layout/search_fragment">
         <action
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/giphyDetailFragment"
-        android:name="de.giphy_clean_architecture.presentation.detail.DetailGiphyFragment"
+        android:name="de.abauer.giphy_clean_architecture.presentation.detail.DetailGiphyFragment"
         android:label="GiphyDetailFragment"
         tools:layout="@layout/fragment_giphy_detail">
         <argument

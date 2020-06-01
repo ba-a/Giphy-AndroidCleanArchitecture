@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.giphy_clean_architecture.presentation.MainActivity">
+    tools:context="de.abauer.giphy_clean_architecture.presentation.MainActivity">
 
     <fragment
         android:id="@+id/navHostFragment"

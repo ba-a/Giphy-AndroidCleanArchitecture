@@ -10,7 +10,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "de.giphy_androidcleanarchitecture"
+        applicationId "de.abauer.giphy_androidcleanarchitecture"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
