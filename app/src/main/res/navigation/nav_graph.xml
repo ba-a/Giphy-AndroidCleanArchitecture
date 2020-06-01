@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/giphyDetailFragment"
-        android:name="de.giphy_clean_architecture.presentation.detail.GiphyDetailFragment"
+        android:name="de.giphy_clean_architecture.presentation.detail.DetailGiphyFragment"
         android:label="GiphyDetailFragment"
         tools:layout="@layout/fragment_giphy_detail">
         <argument

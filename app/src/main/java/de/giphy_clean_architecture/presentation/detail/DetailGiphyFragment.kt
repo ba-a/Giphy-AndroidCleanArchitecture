@@ -15,10 +15,10 @@ import kotlinx.android.synthetic.main.fragment_giphy_detail.*
 import org.koin.android.ext.android.inject
 
 
-class GiphyDetailFragment : Fragment() {
+class DetailGiphyFragment : Fragment() {
 
-    private val giphyDetailFragmentArgs: GiphyDetailFragmentArgs by navArgs()
-    private val giphyDetailViewModel: GiphyDetailViewModel by inject()
+    private val giphyDetailFragmentArgs: DetailGiphyFragmentArgs by navArgs()
+    private val detailGiphyViewModel: DetailGiphyViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,20 +32,20 @@ class GiphyDetailFragment : Fragment() {
 
         initStateHandling()
 
-        giphyDetailViewModel.onGiphyReceived(giphyDetailFragmentArgs.giphyUrl)
+        detailGiphyViewModel.onGiphyReceived(giphyDetailFragmentArgs.giphyUrl)
 
         fab_detail.setOnClickListener {
-            giphyDetailViewModel.onShareButtonClick(giphyDetailFragmentArgs.giphyUrl)
+            detailGiphyViewModel.onShareButtonClick(giphyDetailFragmentArgs.giphyUrl)
         }
     }
 
     private fun initStateHandling() {
-        onStates(giphyDetailViewModel) { state ->
+        onStates(detailGiphyViewModel) { state ->
             when (state) {
-                is GiphyDetailState.LoadGiphy -> {
+                is DetailGiphyState.LoadGiphy -> {
                     loadGiphy(state.giphyUrl)
                 }
-                is GiphyDetailState.ShareGiphy -> {
+                is DetailGiphyState.ShareGiphy -> {
                     createShareChooser(state.giphyUrl)
                 }
             }
