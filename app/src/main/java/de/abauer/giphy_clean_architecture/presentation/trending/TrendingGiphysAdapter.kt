@@ -2,14 +2,13 @@ package de.abauer.giphy_clean_architecture.presentation.trending
 
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import de.abauer.giphy_androidcleanarchitecture.R
+import de.abauer.giphy_androidcleanarchitecture.databinding.ItemTrendingGiphyBinding
 import de.abauer.giphy_clean_architecture.data.inject.GlideApp
 import de.abauer.giphy_clean_architecture.domain.model.Giphy
-import kotlinx.android.synthetic.main.item_trending_giphy.view.*
+import org.jetbrains.annotations.NotNull
 import java.util.*
 
 interface TrendingClickListener {
@@ -25,9 +24,10 @@ class TrendingGiphyAdapter(var trendingGiphys: List<Giphy>) :
         parent: ViewGroup,
         viewType: Int
     ): TrendingGiphysViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_trending_giphy, parent, false)
-        return TrendingGiphysViewHolder(view)
+
+        val itemBinding = ItemTrendingGiphyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return TrendingGiphysViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(viewHolder: TrendingGiphysViewHolder, position: Int) {
@@ -37,14 +37,14 @@ class TrendingGiphyAdapter(var trendingGiphys: List<Giphy>) :
 
     override fun getItemCount(): Int = trendingGiphys.size
 
-    class TrendingGiphysViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class TrendingGiphysViewHolder(itemBinding: @NotNull ItemTrendingGiphyBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
         private val imageViewArtist: ImageView =
-            itemView.imageView_trending_giphy
+            itemBinding.imageViewTrendingGiphy
 
         fun displayGiphy(item: Giphy, clickListener: TrendingClickListener?) {
             val rnd = Random()
-            itemView.imageView_trending_giphy.translationX = 0f
+            imageViewArtist.translationX = 0f
             val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
             itemView.setBackgroundColor(color)
             GlideApp.with(itemView.context).asGif().load(item.url).into(imageViewArtist)

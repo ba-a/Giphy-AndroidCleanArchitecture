@@ -1,38 +1,35 @@
 package de.abauer.giphy_clean_architecture.presentation.trending
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import de.abauer.giphy_androidcleanarchitecture.R
+import de.abauer.giphy_androidcleanarchitecture.databinding.GiphyTrendingFragmentBinding
 import de.abauer.giphy_clean_architecture.domain.model.Giphy
 import de.abauer.giphy_clean_architecture.presentation.MainActivity
 import io.uniflow.androidx.flow.onStates
-import kotlinx.android.synthetic.main.giphy_trending_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import viewLifecycleLazy
 
 
-class TrendingGiphysFragment : Fragment(), TrendingClickListener {
+class TrendingGiphysFragment : Fragment(R.layout.giphy_trending_fragment), TrendingClickListener {
 
     private val trendingGiphysViewModel: TrendingGiphysViewModel by viewModel()
-    private var trendingGiphyAdapter: TrendingGiphyAdapter? = null
+    private lateinit var trendingGiphyAdapter: TrendingGiphyAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.giphy_trending_fragment, container, false)
-    }
+    // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
+    private val binding by viewLifecycleLazy { GiphyTrendingFragmentBinding.bind(requireView()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         (activity!! as MainActivity).supportActionBar!!.title = getString(R.string.trendingTitle)
+
         // Init views
         initRecyclerView()
 
@@ -66,27 +63,26 @@ class TrendingGiphysFragment : Fragment(), TrendingClickListener {
     }
 
     private fun showLoading() {
-        spin_kit_trendingGiphy.visibility = VISIBLE
+        binding.spinKitTrendingGiphy.visibility = VISIBLE
     }
 
     private fun hideLoading() {
-        spin_kit_trendingGiphy.visibility = GONE
+        binding.spinKitTrendingGiphy.visibility = GONE
     }
 
     private fun initRecyclerView() {
         trendingGiphyAdapter = TrendingGiphyAdapter((emptyList()))
-        trendingGiphyAdapter!!.clickListener = this
-        viewPager_trending_giphy.adapter = trendingGiphyAdapter
-        viewPager_trending_giphy.offscreenPageLimit = 5
+        trendingGiphyAdapter.clickListener = this
+        binding.viewPagerTrendingGiphy.adapter = trendingGiphyAdapter
+        binding.viewPagerTrendingGiphy.offscreenPageLimit = 5
 
         val pageTransformer = TrendingGiphysParallaxPageTransformer()
-
-        viewPager_trending_giphy.setPageTransformer(pageTransformer)
+        binding.viewPagerTrendingGiphy.setPageTransformer(pageTransformer)
     }
 
     private fun showTrendingGiphys(giphys: List<Giphy>) {
-        trendingGiphyAdapter?.trendingGiphys = giphys
-        trendingGiphyAdapter?.notifyDataSetChanged()
+        trendingGiphyAdapter.trendingGiphys = giphys
+        trendingGiphyAdapter.notifyDataSetChanged()
     }
 
     override fun onTrendingItemClick(giphyUrl: String, imageView: ImageView) {

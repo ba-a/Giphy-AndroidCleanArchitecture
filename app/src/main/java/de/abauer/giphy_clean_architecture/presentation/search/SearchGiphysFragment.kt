@@ -12,28 +12,22 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import de.abauer.giphy_androidcleanarchitecture.R
+import de.abauer.giphy_androidcleanarchitecture.databinding.SearchFragmentBinding
 import de.abauer.giphy_clean_architecture.domain.model.Giphy
 import de.abauer.giphy_clean_architecture.presentation.MainActivity
 import io.uniflow.androidx.flow.onStates
-import kotlinx.android.synthetic.main.search_fragment.*
-import kotlinx.android.synthetic.main.search_fragment.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import viewLifecycleLazy
 
-class SearchGiphysFragment : Fragment(), SearchClickListener {
+class SearchGiphysFragment : Fragment(R.layout.search_fragment), SearchClickListener {
 
     private val searchViewModel: SearchGiphysViewModel by viewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.search_fragment, container, false)
-    }
+    private val binding by viewLifecycleLazy {  SearchFragmentBinding.bind(requireView()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity!! as MainActivity).supportActionBar!!.title = getString(R.string.searchTitle)
-        initSearch(view)
+        initSearch()
         initRecyclerView()
         initStateHandling()
     }
@@ -59,14 +53,14 @@ class SearchGiphysFragment : Fragment(), SearchClickListener {
     }
 
     private fun initRecyclerView() {
-        recyclerView_searchFragment.layoutManager = GridLayoutManager(context, 2)
+        binding.recyclerViewSearchFragment.layoutManager = GridLayoutManager(context, 2)
         val searchAdapter = SearchAdapter(emptyList())
         searchAdapter.searchClickListener = this
-        recyclerView_searchFragment.adapter = searchAdapter
+        binding.recyclerViewSearchFragment.adapter = searchAdapter
     }
 
-    private fun initSearch(view: View) {
-        view.editText_search.addTextChangedListener(object : TextWatcher {
+    private fun initSearch() {
+        binding.editTextSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable?) {}
             override fun onTextChanged(
@@ -82,14 +76,14 @@ class SearchGiphysFragment : Fragment(), SearchClickListener {
     }
 
     private fun showSearchResult(searchResults: List<Giphy>) {
-        (recyclerView_searchFragment.adapter as SearchAdapter).apply {
+        (binding.recyclerViewSearchFragment.adapter as SearchAdapter).apply {
             searchResultGiphys = searchResults
             notifyDataSetChanged()
         }
     }
 
     private fun clearAdapter() {
-        (recyclerView_searchFragment.adapter as SearchAdapter).apply {
+        (binding.recyclerViewSearchFragment.adapter as SearchAdapter).apply {
             searchResultGiphys = emptyList()
             notifyDataSetChanged()
         }
@@ -100,11 +94,11 @@ class SearchGiphysFragment : Fragment(), SearchClickListener {
     }
 
     private fun showLoading() {
-        spin_kit_search.visibility = View.VISIBLE
+        binding.spinKitSearch.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        spin_kit_search.visibility = View.GONE
+        binding.spinKitSearch.visibility = View.GONE
     }
 
     override fun onSearchItemClick(giphyUrl: String, imageView: ImageView) {

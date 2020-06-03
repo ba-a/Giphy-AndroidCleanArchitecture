@@ -67,6 +67,8 @@ class SingleRunner {
  * By calling [cancelPreviousThenRun], the old task will *always* be cancelled and then the new task will
  * be run. This is useful in situations where a new event implies that the previous work is no
  * longer relevant such as sorting or filtering a list.
+ *
+ * Gist by Sean McQuillan https://gist.github.com/objcode/7ab4e7b1df8acd88696cb0ccecad16f7
  */
 class ControlledRunner<T> {
     /**

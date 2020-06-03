@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import de.abauer.giphy_androidcleanarchitecture.R
+import de.abauer.giphy_androidcleanarchitecture.databinding.ItemSearchresultGiphyBinding
 import de.abauer.giphy_clean_architecture.data.inject.GlideApp
 import de.abauer.giphy_clean_architecture.domain.model.Giphy
-import kotlinx.android.synthetic.main.item_searchresult_giphy.view.*
+import org.jetbrains.annotations.NotNull
 
 interface SearchClickListener {
     fun onSearchItemClick(giphyUrl: String, imageView: ImageView)
@@ -23,9 +23,8 @@ class SearchAdapter(var searchResultGiphys: List<Giphy>) :
         parent: ViewGroup,
         viewType: Int
     ): SearchResultGiphysViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_searchresult_giphy, parent, false)
-        return SearchResultGiphysViewHolder(view)
+        val itemBinding = ItemSearchresultGiphyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SearchResultGiphysViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(viewHolder: SearchResultGiphysViewHolder, position: Int) {
@@ -35,10 +34,11 @@ class SearchAdapter(var searchResultGiphys: List<Giphy>) :
 
     override fun getItemCount(): Int = searchResultGiphys.size
 
-    class SearchResultGiphysViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SearchResultGiphysViewHolder(
+        itemBinding: @NotNull ItemSearchresultGiphyBinding
+    ) : RecyclerView.ViewHolder(itemBinding.root) {
 
-        private val imageViewArtist: ImageView =
-            itemView.imageView_searchresult_giphy
+        private val imageViewArtist: ImageView = itemBinding.imageViewSearchresultGiphy
 
         fun displayGiphy(item: Giphy, clickListener: SearchClickListener?) {
             GlideApp.with(itemView.context).asGif().load(item.url).into(imageViewArtist)

@@ -9,23 +9,19 @@ import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import de.abauer.giphy_androidcleanarchitecture.R
+import de.abauer.giphy_androidcleanarchitecture.databinding.FragmentGiphyDetailBinding
 import de.abauer.giphy_clean_architecture.data.inject.GlideApp
 import io.uniflow.androidx.flow.onStates
-import kotlinx.android.synthetic.main.fragment_giphy_detail.*
 import org.koin.android.ext.android.inject
+import viewLifecycleLazy
 
 
-class DetailGiphyFragment : Fragment() {
+class DetailGiphyFragment : Fragment(R.layout.fragment_giphy_detail) {
 
     private val giphyDetailFragmentArgs: DetailGiphyFragmentArgs by navArgs()
     private val detailGiphyViewModel: DetailGiphyViewModel by inject()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_giphy_detail, container, false)
-    }
+    private val binding by viewLifecycleLazy { FragmentGiphyDetailBinding.bind(requireView()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,7 +30,7 @@ class DetailGiphyFragment : Fragment() {
 
         detailGiphyViewModel.onGiphyReceived(giphyDetailFragmentArgs.giphyUrl)
 
-        fab_detail.setOnClickListener {
+        binding.fabDetail.setOnClickListener {
             detailGiphyViewModel.onShareButtonClick(giphyDetailFragmentArgs.giphyUrl)
         }
     }
@@ -54,7 +50,7 @@ class DetailGiphyFragment : Fragment() {
 
     private fun loadGiphy(url: String) {
         context?.let {
-            GlideApp.with(it).asGif().load(url).into(imageView_detail_giphy)
+            GlideApp.with(it).asGif().load(url).into(binding.imageViewDetailGiphy)
         }
     }
 

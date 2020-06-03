@@ -1,9 +1,9 @@
 package de.abauer.giphy_clean_architecture.presentation.trending
 
 import android.view.View
+import android.widget.ImageView
 import androidx.viewpager2.widget.ViewPager2
-import kotlinx.android.synthetic.main.item_trending_giphy.view.imageView_trending_giphy
-
+import de.abauer.giphy_androidcleanarchitecture.R
 
 class TrendingGiphysParallaxPageTransformer : ViewPager2.PageTransformer {
 
@@ -15,7 +15,8 @@ class TrendingGiphysParallaxPageTransformer : ViewPager2.PageTransformer {
                 view.alpha = 1f
             }
             position <= 1 -> { // [-1,1]
-                val giphy = view.imageView_trending_giphy
+                val imageViewTrending = view.findViewById<ImageView>(R.id.imageView_trending_giphy)
+                val giphy = imageViewTrending
                 giphy.translationX = -position * (pageWidth / 2) //Half the normal speed
             }
             else -> { // (1,+Infinity]
