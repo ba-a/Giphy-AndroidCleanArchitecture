@@ -9,11 +9,13 @@ It uses the giphy developer API to show the latest trending giphys and also cont
 a giphy search that will show first 25 results with the feature to share them.
 
 It is built with Kotlin using:
+    - Single activity multiple fragments pattern
     - MVVM with Repository Pattern(Fragment -> ViewModel -> UseCase -> Repository)
     - Uniflow for UI State updates (great library btw: https://github.com/uniflow-kt/uniflow-kt)
     - Coroutines for Background work
     - NavGraph for navigation
     - BottomNav for the BottomBar
+    - ViewBinding for accessing views
     - Koin for dependency injection
     - Glide for image/gif loading
     - Retrofit + Gson for API calls
@@ -21,3 +23,4 @@ It is built with Kotlin using:
     - RecyclerView
     - mockk for Unit Testing
     - Chucker analysing network traffic
+    
