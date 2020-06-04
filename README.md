@@ -22,5 +22,5 @@ It is built with Kotlin using:
     - ViewPager2 with custom PageTransformer  
     - RecyclerView  
     - mockk for Unit Testing  
-    - Chucker analysing network traffic  
+    - Chucker for analysing network traffic  
     
