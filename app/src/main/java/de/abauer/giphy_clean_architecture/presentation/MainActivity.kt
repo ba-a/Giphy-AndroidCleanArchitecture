@@ -12,9 +12,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val finalHost = NavHostFragment.create(R.navigation.nav_graph)
 
         if (savedInstanceState == null) {
+            val finalHost = NavHostFragment.create(R.navigation.nav_graph)
             supportFragmentManager.beginTransaction()
                 .replace(R.id.nav_host_container, finalHost, NAV_TAG)
                 .setPrimaryNavigationFragment(finalHost) // equivalent to app:defaultNavHost="true"
@@ -27,13 +27,12 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         // Now that BottomNavigationBar has restored its instance state
-        // and its selectedItemId, we can proceed with setting up the
+        // we can proceed with setting up the
         // BottomNavigationBar with Navigation
         setUpNavigation(supportFragmentManager.findFragmentByTag(NAV_TAG) as NavHostFragment)
     }
 
     private fun setUpNavigation(navFragment: NavHostFragment) {
-
         NavigationUI.setupWithNavController(
             bottom_navigation,
             navFragment.navController
@@ -41,6 +40,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val NAV_TAG = "NAV_TAG"
+        private const val NAV_TAG = "NAV_TAG"
     }
 }
