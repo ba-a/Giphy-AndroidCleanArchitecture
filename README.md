@@ -7,6 +7,9 @@ This Repo contains some best practices for current state of the art Android deve
   
 It uses the giphy developer API to show the latest trending giphys and also contains   
 a giphy search that will show first 25 results with the feature to share them.  
+
+To make it work an api key from https://developers.giphy.com/ is needed.
+The key needs to be replaced as BuildConfig variable API_KEY in the build.gradle
     
 It is built with Kotlin using:  
     - Single activity multiple fragments pattern  
@@ -23,4 +26,9 @@ It is built with Kotlin using:
     - RecyclerView  
     - mockk for Unit Testing  
     - Chucker for analysing network traffic  
+    
+Short Demo of the app:
+
+![](AppDemo.gif)
+
     
