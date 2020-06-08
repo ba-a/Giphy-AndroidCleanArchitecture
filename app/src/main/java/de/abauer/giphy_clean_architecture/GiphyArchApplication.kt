@@ -1,6 +1,7 @@
 package de.abauer.giphy_clean_architecture
 
 import android.app.Application
+import de.abauer.giphy_androidcleanarchitecture.BuildConfig
 import de.abauer.giphy_clean_architecture.inject.appComponent
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,6 +18,7 @@ class GiphyArchApplication : Application() {
             modules(appComponent)
         }
 
-        Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG)
+            Timber.plant(Timber.DebugTree())
     }
 }
