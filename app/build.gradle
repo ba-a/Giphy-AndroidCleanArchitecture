@@ -46,7 +46,7 @@ android {
 dependencies {
     def nav_version = "2.3.0-beta01"
     def retrofit_version = '2.8.1'
-    def gson_version = '2.8.5'
+    def moshi_version = '1.9.2'
     def koin_version = '2.1.5'
     def koin_architecture_version = '0.9.3'
     def constraint_layout_version = '2.0.0-beta6'
@@ -84,9 +84,11 @@ dependencies {
 
     //REST - APIService
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.google.code.gson:gson:$gson_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version"
+    //REST - Moshi
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     //Koin
     implementation "org.koin:koin-core:$koin_version"
