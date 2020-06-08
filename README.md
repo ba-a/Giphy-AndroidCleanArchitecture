@@ -21,7 +21,7 @@ It is built with Kotlin using:
     - ViewBinding for accessing views  
     - Koin for dependency injection  
     - Glide for image/gif loading  
-    - Retrofit + Gson for API calls  
+    - Retrofit + Moshi for API calls  
     - ViewPager2 with custom PageTransformer  
     - RecyclerView  
     - mockk for Unit Testing  

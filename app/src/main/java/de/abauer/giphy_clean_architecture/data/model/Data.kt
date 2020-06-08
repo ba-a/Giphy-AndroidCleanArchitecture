@@ -1,5 +1,8 @@
 package de.abauer.giphy_clean_architecture.data.model
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class Data(
     val bitly_gif_url: String?,
     val bitly_url: String?,

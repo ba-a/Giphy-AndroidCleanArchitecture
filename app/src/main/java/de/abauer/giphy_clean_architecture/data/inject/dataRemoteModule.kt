@@ -4,6 +4,8 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import de.abauer.giphy_androidcleanarchitecture.BuildConfig
 import de.abauer.giphy_clean_architecture.data.repository.remote.SearchGiphysRemoteRepository
 import de.abauer.giphy_clean_architecture.data.repository.remote.TrendingGiphysRemoteSource
@@ -18,7 +20,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 val dataRemoteModule = module {
@@ -59,7 +61,7 @@ fun createRetrofit(context: Context): Retrofit {
     return Retrofit.Builder()
         .client(createHttpClient(context))
         .baseUrl("https://api.giphy.com/")
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(createMoshi()))
         .build()
 }
 
@@ -93,6 +95,12 @@ fun createHttpInspectorInterceptor(context: Context): Interceptor {
         collector = chuckerCollector,
         maxContentLength = 250000L
     )
+}
+
+fun createMoshi(): Moshi {
+    return Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 }
 
 
